@@ -2,14 +2,22 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-app.use(express.static("public"));
 
+// Serve static files
+app.use(express.static(path.join(__dirname, "public")));
+
+// HOME ROUTE (THIS FIXES "Cannot GET /")
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+// Protected PDF route
 app.get("/full-notes", (req, res) => {
-  res.sendFile(path.join(__dirname, "pdfs/full-notes.pdf"));
+  res.sendFile(path.join(__dirname, "pdfs", "full-notes.pdf"));
 });
 
-app.listen(3000, () => {
-  console.log("Server running at http://localhost:4000");
+// Render uses PORT env
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server running on port", PORT);
 });
-
-  
