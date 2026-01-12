@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Full Notes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>MRB Notes Access</h2>
+
+<p id="msg"></p>
+
+<a id="download" href="/full-notes.pdf" target="_blank" style="display:none;">
+📄 Download Full Notes
+</a>
+
+<script>
+  const txn = localStorage.getItem("txnId");
+
+  if (txn) {
+    document.getElementById("msg").innerText =
+      "Payment received. Transaction ID: " + txn;
+    document.getElementById("download").style.display = "block";
+  } else {
+    document.getElementById("msg").innerText =
+      "Payment not verified. Please pay first.";
+  }
+</script>
+
+</body>
+</html>
